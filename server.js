@@ -9,7 +9,14 @@ connectDB();
 //init middleware
 app.use(express.json({ extended : false }));
 
-app.get('/', (req, res) => res.send('API running'));
+app.get(
+    '/', 
+    [
+        check('name', 'Name is required').not().isEmpty(),
+        check('email', 'Enter a valid E-mail').isEmail(),
+        check('password', 'please enter a password with 6 or more charecters').isLength({min: 6})
+    ],
+    (req, res) => res.send('API running'));
 
 //Define routes
 app.use('/api/users', require('./routes/api/users'));
