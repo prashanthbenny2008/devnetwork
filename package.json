@@ -4,7 +4,7 @@
   "description": "A social network example",
   "main": "index.js",
   "scripts": {
-    "start": "nodee serve",
+    "start": "node server",
     "server": "nodemon server"
   },
   "author": "Prashanth Benny",
