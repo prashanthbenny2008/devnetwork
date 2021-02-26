@@ -12,7 +12,7 @@ module.exports = function( req, res, next ){  //request, response and callback f
     //Token verification
     try{
         let decoded = jwt.verify(token, config.get('jwtToken'));
-        req.user = jwt.decoded.user;
+        req.user = decoded.user;
         next();
     }catch(err){
         return res.status(401).json({ msg: 'Auth failed. Invalid token.'});
