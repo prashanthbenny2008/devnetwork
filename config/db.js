@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
-const config = require('config');
+// const config = require('config');
 const db = config.get('mongoURI');
+const dotenv = require("dotenv");
 
 const connectDB = async ()=> {
+    dotenv.config();
+    let mongoURI = "mongodb+srv://" + process.env.MONGO_UN + ":" + process.env.MONGO_KEY + "@" + process.env.MONGO_HOST + "/test?retryWrites=true&w=majority";
+    console.log(mongoURI);
     try{
-        await mongoose.connect("mongodb+srv://" + process.env.MONGO_UN + ":" + process.env.MONGO_KEY + "@" + process.env.MONGO_HOST + "/test?retryWrites=true&w=majority", { 
+        await mongoose.connect(mongoURI, { 
             useNewUrlParser: true, 
             useUnifiedTopology: true, 
             useCreateIndex: true ,
