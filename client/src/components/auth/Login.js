@@ -4,10 +4,10 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
+import Spinner from '../layout/Spinner';
 // import { setAlert } from '../../actions/alert';
 
-
-const Login = ({ login, isAuthenticated }) => {
+const Login = ({ login, isAuthenticated, loading }) => {
     const [ formData, setFormData ] = useState({
         email: '',
         password: ''
@@ -18,14 +18,14 @@ const Login = ({ login, isAuthenticated }) => {
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
     const onSubmit = async e => {
         e.preventDefault();
-        login({ email, password });
+        await login({ email, password });
     } 
 
     if(isAuthenticated){
         return <Redirect to="/dashboard" />;
     }
     
-    return(
+    return loading ? <Spinner /> :
         <Fragment>
             <h1 className="large text-primary">Sign In</h1>
             <p className="lead"><i className="fas fa-user"></i> Sign Into Your Account</p>
@@ -59,7 +59,6 @@ const Login = ({ login, isAuthenticated }) => {
                 Don't have an account? <Link to="/register">Sign Up</Link>
             </p>
         </Fragment>
-    )
 }
 
 login.propTypes = {
@@ -68,7 +67,8 @@ login.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated : state.auth.isAuthenticated
+    isAuthenticated : state.auth.isAuthenticated,
+    loading: state.auth.loading
 })
 
 export default connect(mapStateToProps, { login }) (Login);

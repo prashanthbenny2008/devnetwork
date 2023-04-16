@@ -5,6 +5,7 @@ import {
     REGISTER_FAIL, 
     USER_LOADED, 
     AUTH_ERROR,
+    LOGIN_PROGRESS,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
@@ -77,6 +78,9 @@ export const login = ({ email, password }) => async dispatch => {
     }
 
     const body = JSON.stringify({ email, password });
+    dispatch({
+        type: LOGIN_PROGRESS
+    });
 
     try {
         const res = await axios.post( 'api/auth', body, config );

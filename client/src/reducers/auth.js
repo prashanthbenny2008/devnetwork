@@ -2,6 +2,7 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     USER_LOADED,
+    LOGIN_PROGRESS,
     AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
@@ -26,6 +27,11 @@ export default function Auth( state = initialState, action ){
                 isAuthenticated: true,
                 user: payload,
                 loading: false
+            };
+        case LOGIN_PROGRESS:
+            return {
+                ...state,
+                loading: true
             };
         case REGISTER_SUCCESS:
         case LOGIN_SUCCESS:
