@@ -1,0 +1,9 @@
+# Ignore Log files
+logs/
+
+# Ignore git and cache
+.git
+.cache
+
+# Ignore node-modules
+node_modules
